@@ -1,8 +1,7 @@
-package servlets;
+package com.servlets;
 
-import db.Connect;
-import db.Query;
-import models.Player;
+
+import com.models.Player;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,18 +36,6 @@ import java.util.List;
         request.setAttribute("textA", varTextA);
         String varTextB = "It JSP.";
         request.setAttribute("textB", varTextB);
-        Query query = new Query();
-        List<Player> roster = new ArrayList<>();;
-        try {
-            Connect connect = new Connect();
-            Connection connection = connect.getConnection();
-            roster = query.selectRoster(connection);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        request.setAttribute("getRoster", roster);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }

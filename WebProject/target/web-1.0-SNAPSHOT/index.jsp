@@ -25,6 +25,10 @@ ${textB}
         </tr>
     <c:forEach var="player" items="${getRoster}">
         <tr>
+            <td><c:out value="${player.id}"/></td>
+            <td><c:out value="${player.firstname}"/></td>
+            <td><c:out value="${player.lastname}"/></td>
+            <td><c:out value="${player.number}"/></td>
         </tr>
     </c:forEach>
 </table>

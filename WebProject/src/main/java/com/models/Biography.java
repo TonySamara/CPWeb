@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 /**
  * Created by ANTON on 26.02.2016.
@@ -12,8 +12,9 @@ import javax.persistence.*;
 
 public class Biography {
     @Id
+    @SequenceGenerator(name = "biography_seq", sequenceName = "biography_biography_id_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "biography_seq")
     @Column(name="id_biography")
-    @GeneratedValue
     private int id_biography;
     @Column(name="height")
     private int height;
@@ -25,8 +26,12 @@ public class Biography {
     private String country;
     @Column(name="yearspro")
     private int yearsPro;
-    @Column(name="id_player")
-    private int id_player;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_player")
+    private Player player;
+
+    public Biography() {
+    }
 
     public int getId_biography() {
         return id_biography;
@@ -76,11 +81,11 @@ public class Biography {
         this.yearsPro = yearsPro;
     }
 
-    public int getId_player() {
-        return id_player;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setId_player(int id_player) {
-        this.id_player = id_player;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

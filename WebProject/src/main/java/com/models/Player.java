@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 
 import javax.persistence.*;
@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Table(name="Roster")
 public class Player {
     @Id
+    @SequenceGenerator(name = "player_seq", sequenceName = "player_player_id_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "player_seq")
     @Column(name="id_player")
-    @GeneratedValue
     private int id;
     @Column(name="firstname")
     private String firstname;
@@ -21,8 +22,12 @@ public class Player {
     private int number;
     @Column(name="image")
     private String image;
-    @Column(name="id_position")
-    private int id_position;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_position")
+    private Position position;
+
+    public Player(){
+    }
 
     public int getId() {
         return id;
@@ -64,11 +69,11 @@ public class Player {
         this.image = image;
     }
 
-    public int getId_position() {
-        return id_position;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setId_position(int id_position) {
-        this.id_position = id_position;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

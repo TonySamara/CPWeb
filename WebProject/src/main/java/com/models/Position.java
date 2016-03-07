@@ -1,4 +1,4 @@
-package models;
+package com.models;
 
 import javax.persistence.*;
 
@@ -9,11 +9,15 @@ import javax.persistence.*;
 @Table(name="Position")
 public class Position {
     @Id
+    @SequenceGenerator(name = "position_seq", sequenceName = "position_position_id_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "position_seq")
     @Column(name="id_position")
-    @GeneratedValue
     private int id_position;
     @Column(name="position")
     private String position;
+
+    public Position(){
+    }
 
     public int getId_position() {
         return id_position;

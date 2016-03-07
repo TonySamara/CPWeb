@@ -1,9 +1,6 @@
-package models;
+package com.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by ANTON on 26.02.2016.
@@ -12,6 +9,8 @@ import javax.persistence.Table;
 @Table(name="Statistics")
 public class Statistics {
     @Id
+    @SequenceGenerator(name = "stat_seq", sequenceName = "stat_stat_id_seq", allocationSize = 0)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stat_seq")
     @Column(name="id_statistics")
     private int id_statistics;
     @Column(name="ppg")
@@ -22,8 +21,13 @@ public class Statistics {
     private double apg;
     @Column(name="fg")
     private double fg;
-    @Column(name="id_player")
-    private int id_player;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_player")
+    private Player player;
+
+    public Statistics(){
+
+    }
 
     public int getId_statistics() {
         return id_statistics;
@@ -65,11 +69,11 @@ public class Statistics {
         this.fg = fg;
     }
 
-    public int getId_player() {
-        return id_player;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setId_player(int id_player) {
-        this.id_player = id_player;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
