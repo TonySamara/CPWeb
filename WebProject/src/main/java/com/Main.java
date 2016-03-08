@@ -20,6 +20,7 @@ public class Main {
     public static void main(final String[] args) throws SQLException {
         PlayerDAOImpl playerDAO = new PlayerDAOImpl();
         List<Player> list = playerDAO.getAllPlayers();
+
         for (int i =0; i<list.size();i++){
             System.out.println(list.get(i).getLastname());
         }

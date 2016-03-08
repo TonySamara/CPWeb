@@ -31,6 +31,7 @@ import java.util.List;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+
         String varTextA = "Hello World!";
         request.setAttribute("textA", varTextA);
         String varTextB = "It JSP.";
