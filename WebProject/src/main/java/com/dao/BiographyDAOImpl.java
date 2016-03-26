@@ -35,7 +35,7 @@ public class BiographyDAOImpl implements BiographyDAO {
     }
 
     @Override
-    public Biography getBiographyById(Long id) throws SQLException {
+    public Biography getBiographyById(int id) throws SQLException {
         Biography biography = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
            biography = (Biography) session.get(Biography.class, id);

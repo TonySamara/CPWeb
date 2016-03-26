@@ -1,12 +1,17 @@
 package com.models;
 
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
  * Created by ANTON on 26.02.2016.
  */
 @Entity
+@OnDelete(
+        action= OnDeleteAction.CASCADE)
 @Table(name="Roster")
 public class Player {
     @Id

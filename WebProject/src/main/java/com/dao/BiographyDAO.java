@@ -13,7 +13,7 @@ import java.util.List;
 public interface BiographyDAO {
     public void addBiography(Biography biography) throws SQLException;
     public void updateBiography(Biography biography) throws SQLException;
-    public Biography getBiographyById(Long id) throws SQLException;
+    public Biography getBiographyById(int id) throws SQLException;
     public List getAllBiography() throws SQLException;
     public void deleteBiography(Biography biography) throws SQLException;
 }

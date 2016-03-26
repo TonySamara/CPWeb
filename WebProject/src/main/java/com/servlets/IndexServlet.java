@@ -1,11 +1,11 @@
 package com.servlets;
 
 
+import com.dao.PlayerDAOImpl;
 import com.models.Player;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,25 +18,31 @@ import java.util.List;
 /**
  * Created by ANTON on 25.02.2016.
  */
-@WebServlet("/index")
  public class IndexServlet extends HttpServlet {
 
-    @Override
+    public IndexServlet(){
+        super();
+    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         super.doPost(request, response);
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-
-        String varTextA = "Hello World!";
-        request.setAttribute("textA", varTextA);
-        String varTextB = "It JSP.";
-        request.setAttribute("textB", varTextB);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        List<Player> roster = null;
+        String a = null;
+        PlayerDAOImpl playerDAO = new PlayerDAOImpl();
+        try {
+            roster = playerDAO.getAllPlayers();
+            a = roster.get(1).getFirstname();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/view/index.jsp");
+        System.out.println(roster.get(0).getFirstname());
+        request.setAttribute("roster", roster);
         dispatcher.forward(request, response);
     }
 }

@@ -4,12 +4,16 @@ package com.models;
  * Created by ANTON on 26.02.2016.
  */
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 
 @Entity
 @Table(name="Biography")
-
+@OnDelete(
+        action= OnDeleteAction.CASCADE)
 public class Biography {
     @Id
     @SequenceGenerator(name = "biography_seq", sequenceName = "biography_biography_id_seq", allocationSize = 0)
@@ -26,7 +30,7 @@ public class Biography {
     private String country;
     @Column(name="yearspro")
     private int yearsPro;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinColumn(name="id_player")
     private Player player;
 

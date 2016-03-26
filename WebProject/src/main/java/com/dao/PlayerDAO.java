@@ -11,7 +11,7 @@ import java.util.List;
 public interface PlayerDAO {
     public void addPlayer(Player player) throws SQLException;
     public void updatePlayer(Player player) throws SQLException;
-    public Player getPlayerById(Long id) throws SQLException;
+    public Player getPlayerById(int id) throws SQLException;
     public List getAllPlayers() throws SQLException;
     public void deletePlayer(Player player) throws SQLException;
 }

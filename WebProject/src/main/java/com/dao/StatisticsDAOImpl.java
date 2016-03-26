@@ -1,10 +1,9 @@
 package com.dao;
 
-import com.models.Biography;
 import com.models.Statistics;
 import org.hibernate.Session;
 
-import javax.management.j2ee.statistics.Statistic;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  */
 public class StatisticsDAOImpl implements  StatisticsDAO {
     @Override
-    public void addStatistic(Statistic statistic) throws SQLException {
+    public void addStatistic(Statistics statistic) throws SQLException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(statistic);
@@ -25,7 +24,7 @@ public class StatisticsDAOImpl implements  StatisticsDAO {
     }
 
     @Override
-    public void updateStatistic(Statistic statistic) throws SQLException {
+    public void updateStatistic(Statistics statistic) throws SQLException {
       try (Session session = HibernateUtil.getSessionFactory().openSession()) {
         session.beginTransaction();
         session.update(statistic);
@@ -36,10 +35,10 @@ public class StatisticsDAOImpl implements  StatisticsDAO {
     }
 
     @Override
-    public Statistic getStatisticById(Long id) throws SQLException {
-        Statistic statistic = null;
+    public Statistics getStatisticById(int id) throws SQLException {
+        Statistics statistic = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            statistic = (Statistic) session.get(Statistics.class, id);
+            statistic = (Statistics) session.get(Statistics.class, id);
         } catch (ExceptionInInitializerError e) {
             System.out.println(e.getMessage());
         }
@@ -58,7 +57,7 @@ public class StatisticsDAOImpl implements  StatisticsDAO {
     }
 
     @Override
-    public void deleteStatistic(Statistic statistic) throws SQLException {
+    public void deleteStatistic(Statistics statistic) throws SQLException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.delete(statistic);

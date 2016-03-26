@@ -1,6 +1,9 @@
 package com.dao;
 
+import com.models.Biography;
 import com.models.Player;
+import com.models.Statistics;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.sql.SQLException;
@@ -31,7 +34,7 @@ public class PlayerDAOImpl implements PlayerDAO {
         }
     }
 
-    public Player getPlayerById(Long id) throws SQLException {
+    public Player getPlayerById(int id) throws SQLException {
         Player player = new Player();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             player = (Player) session.get(Player.class, id);
@@ -53,7 +56,9 @@ public class PlayerDAOImpl implements PlayerDAO {
 
     public void deletePlayer(Player player) throws SQLException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
             session.beginTransaction();
+
             session.delete(player);
             session.getTransaction().commit();
         } catch (ExceptionInInitializerError e) {
