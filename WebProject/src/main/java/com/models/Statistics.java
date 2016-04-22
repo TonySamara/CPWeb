@@ -1,12 +1,16 @@
 package com.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 /**
  * Created by ANTON on 26.02.2016.
  */
+
 @Entity
-@Table(name="Statistics")
+@Table(name="statistics")
 public class Statistics {
     @Id
     @SequenceGenerator(name = "stat_seq", sequenceName = "stat_stat_id_seq", allocationSize = 0)

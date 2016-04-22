@@ -1,5 +1,6 @@
 package com.servlets;
 
+import com.dao.BiographyDAO;
 import com.dao.BiographyDAOImpl;
 import com.dao.PlayerDAOImpl;
 import com.dao.StatisticsDAOImpl;
@@ -22,12 +23,15 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("playerId"));
-        Player player = new Player();
+        BiographyDAOImpl biographyDAO = new BiographyDAOImpl();
         PlayerDAOImpl playerDAO =new PlayerDAOImpl();
+        StatisticsDAOImpl statisticsDAO = new StatisticsDAOImpl();
         try {
-            player = playerDAO.getPlayerById(id);
+            Player player = playerDAO.getPlayerById(id);
+            statisticsDAO.delStatByPlayer(id);
+            biographyDAO.delBiographyByPlayer(id);
             playerDAO.deletePlayer(player);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/index.jsp");

@@ -3,6 +3,8 @@ package com.dao;
 
 
 
+import com.models.Biography;
+import com.models.Player;
 import com.models.Statistics;
 
 import java.sql.SQLException;
@@ -17,4 +19,6 @@ public interface StatisticsDAO {
     public Statistics getStatisticById(int id) throws SQLException;
     public List getAllStatistic() throws SQLException;
     public void deleteStatistic(Statistics statistic) throws SQLException;
+    public void delStatByPlayer(int id) throws SQLException;
+    public List<Statistics> getStatByPlayerId(Player player) throws SQLException;
 }

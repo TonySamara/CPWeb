@@ -12,7 +12,7 @@ import java.util.List;
 public interface PositionDAO {
     public void addPosition(Position position) throws SQLException;
     public void updatePosition(Position position) throws SQLException;
-    public Position getPositionById(Long id) throws SQLException;
+    public Position getPositionById(int id) throws SQLException;
     public List getAllPosition() throws SQLException;
     public void deletePosition(Position position) throws SQLException;
 }

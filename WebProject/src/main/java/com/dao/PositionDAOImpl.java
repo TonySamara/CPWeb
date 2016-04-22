@@ -39,7 +39,7 @@ public class PositionDAOImpl implements PositionDAO {
     }
 
     @Override
-    public Position getPositionById(Long id) throws SQLException {
+    public Position getPositionById(int id) throws SQLException {
         Position position = new Position();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             position = (Position) session.get(Position.class, id);

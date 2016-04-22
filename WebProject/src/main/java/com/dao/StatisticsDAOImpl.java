@@ -1,7 +1,11 @@
 package com.dao;
 
+import com.models.Biography;
+import com.models.Player;
 import com.models.Statistics;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 
 import java.sql.SQLException;
@@ -65,5 +69,27 @@ public class StatisticsDAOImpl implements  StatisticsDAO {
         } catch (ExceptionInInitializerError e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void delStatByPlayer(int id) throws SQLException {
+        String query = "delete from \"statistics\" where id_player = "+id;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.createSQLQuery(query).executeUpdate();
+        } catch (ExceptionInInitializerError e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Statistics> getStatByPlayerId(Player player) throws SQLException {
+        List<Statistics> stats = new ArrayList<>();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            stats=session.createCriteria(Statistics.class).add(Restrictions.eq("player",player)).list();
+
+        } catch (ExceptionInInitializerError e) {
+            System.out.println(e.getMessage());
+        }
+        return stats;
     }
 }

@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.models.Position" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dao.PositionDAOImpl" %><%--
   Created by IntelliJ IDEA.
   User: ANTON
   Date: 25.03.2016
@@ -9,41 +12,40 @@
 <html>
 <script src="./validation.js"></script>
 <head>
+    <style>
+        <%@include file="/resources/style.css" %>
+    </style>
     <title>Add Player</title>
 </head>
 <body>
 <form action="/" align="center">
-    <button type="submit">Home</button>
+    <button class="a" type="submit">Home</button>
 </form>
 <form action="/add" method="get" align="center" name="data">
-    <p>Enter firstname</p>
-    <input type="text" name="firstname"  required value="">
-    <p>Enter lastname</p>
-    <input type="text" name="lastname"  required value="">
-    <p>Enter number</p>
-    <input type="text" name="number"  required value="">
-    <p>Enter Image URL</p>
-    <input type="text" name="url" >
-    <p>Points per game</p>
-    <input type="text" name="ppg"  required value="">
-    <p>Assists per game</p>
-    <input type="text" name="apg"  required value="">
-    <p>Rebounds per game</p>
-    <input type="text" name="rpg"  required value="">
-    <p>FG%</p>
-    <input type="text" name="fg"  required value="">
-    <p>Height</p>
-    <input type="text" name="height">
-    <p>Weight</p>
-    <input type="text" name="weight">
-    <p>Prior to NBA</p>
-    <input type="text" name="ptNBA">
-    <p>Country</p>
-    <input type="text" name="country">
-    <p>YearsPro</p>
-    <input type="text" name="yPro"  required value="">
+    <p></p><input type="text" name="firstname"  placeholder="Firstname" required value="">
+    <p></p><input type="text" name="lastname"  placeholder="Lastname" required value="">
+    <p></p><input type="text" name="number"  placeholder="Number" required value="">
+    <p></p><select size="3" name="position" align="center">
+    <%
+            List<Position> positionList = new ArrayList<Position>();
+            PositionDAOImpl positionDAO = new PositionDAOImpl();
+            positionList = positionDAO.getAllPosition();
+            for (Position position: positionList){
+    %>
+        <option value="<%=position.getId_position()%>"><%=position.getPosition()%></option>
+    <%}%>
+        <p></p><input type="text" placeholder="Image url" name="url" >
+        <p></p><input type="text" name="ppg" placeholder="Points" required value="">
+        <p></p><input type="text" name="apg"  placeholder="Assists" required value="">
+        <p></p><input type="text" name="rpg"  placeholder="Rebounds" required value="">
+        <p></p><input type="text" name="fg"  placeholder="FG%" required value="">
+        <p></p><input type="text" name="height" placeholder="Height">
+        <p></p><input type="text" name="weight" placeholder="Weight">
+        <p></p><input type="text" name="ptNBA" placeholder="Priot to NBA">
+        <p></p><input type="text" name="country" placeholder="Country">
+        <p></p><input type="text" name="yPro"  required value="" placeholder="Years pro">
     <p></p>
-    <button type="submit" name="add">Add player</button>
+    <button class="a" type="submit" name="add">Add player</button>
 </form>
 </body>
 </html>

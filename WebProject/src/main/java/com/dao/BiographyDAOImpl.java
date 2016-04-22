@@ -2,7 +2,9 @@ package com.dao;
 
 import com.models.Biography;
 import com.models.Player;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -65,5 +67,26 @@ public class BiographyDAOImpl implements BiographyDAO {
         } catch (ExceptionInInitializerError e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void delBiographyByPlayer(int id) throws SQLException {
+        String query = "delete from \"biography\" where id_player = "+id;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.createSQLQuery(query).executeUpdate();
+        } catch (ExceptionInInitializerError e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Biography> getBiographyByPlayerId(Player player) throws SQLException {
+        List<Biography> players = new ArrayList<>();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+           players=session.createCriteria(Biography.class).add(Restrictions.eq("player",player)).list();
+        } catch (ExceptionInInitializerError e) {
+            System.out.println(e.getMessage());
+        }
+        return players;
     }
 }

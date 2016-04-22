@@ -31,18 +31,7 @@ import java.util.List;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-        List<Player> roster = null;
-        String a = null;
-        PlayerDAOImpl playerDAO = new PlayerDAOImpl();
-        try {
-            roster = playerDAO.getAllPlayers();
-            a = roster.get(1).getFirstname();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/view/index.jsp");
-        System.out.println(roster.get(0).getFirstname());
-        request.setAttribute("roster", roster);
         dispatcher.forward(request, response);
     }
 }

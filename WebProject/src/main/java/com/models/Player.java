@@ -10,8 +10,7 @@ import javax.persistence.*;
  * Created by ANTON on 26.02.2016.
  */
 @Entity
-@OnDelete(
-        action= OnDeleteAction.CASCADE)
+
 @Table(name="Roster")
 public class Player {
     @Id
@@ -27,7 +26,7 @@ public class Player {
     private int number;
     @Column(name="image")
     private String image;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_position")
     private Position position;
 

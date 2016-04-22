@@ -11,9 +11,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="Biography")
-@OnDelete(
-        action= OnDeleteAction.CASCADE)
+@Table(name="biography")
 public class Biography {
     @Id
     @SequenceGenerator(name = "biography_seq", sequenceName = "biography_biography_id_seq", allocationSize = 0)

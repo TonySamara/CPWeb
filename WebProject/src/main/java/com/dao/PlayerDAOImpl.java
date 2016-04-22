@@ -58,7 +58,6 @@ public class PlayerDAOImpl implements PlayerDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             session.beginTransaction();
-
             session.delete(player);
             session.getTransaction().commit();
         } catch (ExceptionInInitializerError e) {
