@@ -2,6 +2,7 @@ package com.servlets;
 
 import com.dao.BiographyDAOImpl;
 import com.dao.PlayerDAOImpl;
+import com.dao.PositionDAOImpl;
 import com.dao.StatisticsDAOImpl;
 import com.models.Biography;
 import com.models.Player;
@@ -30,6 +31,10 @@ public class EditServlet extends HttpServlet {
             player.setFirstname(request.getParameter("firstname"));
             player.setLastname(request.getParameter("lastname"));
             player.setNumber(Integer.parseInt(request.getParameter("number")));
+            Position position = new Position();
+            PositionDAOImpl positionDAO = new PositionDAOImpl();
+            position = positionDAO.getPositionById(Integer.parseInt(request.getParameter("position")));
+            player.setPosition(position);
             Statistics statistics;
             StatisticsDAOImpl statDAO = new StatisticsDAOImpl();
             try {

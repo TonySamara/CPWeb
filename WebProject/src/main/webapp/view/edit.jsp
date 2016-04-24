@@ -6,6 +6,8 @@
 <%@ page import="com.models.Biography" %>
 <%@ page import="com.models.Position" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dao.PositionDAOImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
@@ -70,14 +72,24 @@
         %>
         </td>
         <td>
-            <%try{ %>
-            <input name ="position" placeholder="position" value="<%=position.getId_position()%>">
-            <%
-            }
-            catch (Exception e){
-            %>
-            <input name ="position" value="">
-            <%
+        <select name="position"><%
+            List<Position> positionList = new ArrayList<Position>();
+            PositionDAOImpl positionDAO = new PositionDAOImpl();
+            positionList = positionDAO.getAllPosition();
+            boolean check;
+        %>
+            <option selected value="<%=position.getId_position()%>"><%=position.getPosition()%></option>
+            <% for (Position pos: positionList){
+                check=true;
+
+                if (pos.getId_position()== position.getId_position()) check=false;
+
+            if (check==true){
+        %>
+
+                <option value="<%=pos.getId_position()%>"><%=pos.getPosition()%></option>
+                    <%
+                }
             }
         %>
         </td>

@@ -17,25 +17,29 @@
     </style>
     <title>Add Player</title>
 </head>
-<body>
+<body background="C:\Users\ANTON\Desktop\Web-проектирование\Github\CPWeb\WebProject\add.png">
 <form action="/" align="center">
     <button class="a" type="submit">Home</button>
 </form>
+<%
+    List<Position> positionList = new ArrayList<Position>();
+    PositionDAOImpl positionDAO = new PositionDAOImpl();
+    positionList = positionDAO.getAllPosition();
+%>
 <form action="/add" method="get" align="center" name="data">
-    <p></p><input type="text" name="firstname"  placeholder="Firstname" required value="">
-    <p></p><input type="text" name="lastname"  placeholder="Lastname" required value="">
-    <p></p><input type="text" name="number"  placeholder="Number" required value="">
-    <p></p><select size="3" name="position" align="center">
+    <p><input type="text" name="firstname"  placeholder="Firstname" required value=""></p>
+    <p><input type="text" name="lastname"  placeholder="Lastname" required value=""></p>
+    <p><input type="text" name="number"  placeholder="Number" required value=""></p>
+    Position
+    <select  name="position">
     <%
-            List<Position> positionList = new ArrayList<Position>();
-            PositionDAOImpl positionDAO = new PositionDAOImpl();
-            positionList = positionDAO.getAllPosition();
             for (Position position: positionList){
     %>
         <option value="<%=position.getId_position()%>"><%=position.getPosition()%></option>
     <%}%>
+    </select>
         <p></p><input type="text" placeholder="Image url" name="url" >
-        <p></p><input type="text" name="ppg" placeholder="Points" required value="">
+        <p><input type="text" name="ppg" placeholder="Points" required value=""></p>
         <p></p><input type="text" name="apg"  placeholder="Assists" required value="">
         <p></p><input type="text" name="rpg"  placeholder="Rebounds" required value="">
         <p></p><input type="text" name="fg"  placeholder="FG%" required value="">

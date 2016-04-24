@@ -10,7 +10,6 @@ import javax.persistence.*;
  * Created by ANTON on 26.02.2016.
  */
 @Entity
-
 @Table(name="Roster")
 public class Player {
     @Id
